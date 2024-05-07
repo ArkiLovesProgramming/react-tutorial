@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        // 未受控制的组件，就是表单数据通过 ref 操作 dom 来获取的，而不是通过 state 进行双向绑定的。
+        class MyComponent extends React.Component{
+
+            state = {name: "", age: 0}
+            
+            //表单提交的回调
+			handleSubmit = (event)=>{
+				event.preventDefault() //阻止表单默认的提交，就不会跳 action 了
+				const {name, age} = this
+				alert(`你输入的用户名是：${name.value},你输入的age是：${age.value}`)
+			}
+            // 注意： 这里是报错的，原因不明，gpt 说，不应该采用 ref 来直接操作 dom，这和 react 开发观念违背
+            // 但是有些时候我们又确实需要，所以看情况，能不用就不用，比如这里能用事件函数，在 eventtargetvalue 就尽量这样
+            // if here, we adopt state to display, it will work well.
+            // 而下面这种方法，react 不会自动更新
+            // <p>{thisnamevalue}</p>
+            render(){
+                return (
+                    <div>
+                        <form onSubmit={this.handleSubmit}>
+                            <input ref={c=>{this.name = c}} placeholder="Type name in" type="text" name="name"/>
+                            <input ref={c=>{this.age = c}} placeholder="Type age in" type="text" name="age"/>
+                            <button type="submit">submit</button>
+                        </form>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>, document.getElementById("app"))
+    </script>
+</body>
+</html>

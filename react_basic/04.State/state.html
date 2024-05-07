@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="test"></div>
+
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+    
+        class MyComponent extends React.Component{
+            // props parameter is required to input while using constructor, here, the constructor is for using state
+            constructor(props){
+                //This is also required step
+                super(props)
+                //State is mounted to the instance of component, here, the this is pointing to instance of component as well
+                this.state = {isRed: false, isBlack: true}
+            }
+
+            // 由于下面我们讲的 a 的例子，这里的 state 也可以不借助 constructor，而采用如下方案
+            //a = {isRed: false, isBlack: true}
+            //所以其实我们甚至都不需要用到 constructor，官方解释只有我们需要绑定方法的 this 指向或者state 的时候会用到
+            //但是这些我们都可以采用类的特性去更加方便的使用
+
+            // question? why here, the 'this' is pointing to the instance of component?
+            // cos render function is invoked by the instance of component, which has been done by React
+            render(){
+                // console.log(this)
+                return (
+                    <h1 id="myh1" onClick={this.changeBackground}>hello, I am good! React!</h1>
+                )
+            }
+
+            // cos here a is mounted directly to the instance of component, so this is pointing to the instance of component too.
+            a = 1
+            // so here if we assign changeBackgroud a function, so the 'this' inside the function is also pointing to the instance of component.
+            changeBackground = ()=>{
+                const h1 = document.getElementById('myh1');
+                console.log(this.state)
+                if (this.state.isRed){
+                    h1.style.color = "black"
+                    // Headsup: this way is wrong, if you want to update the data in state, you have to use setState function stored in prototype of component
+                    // but for the initiation of state in constructor, you can just use assignment statement
+                    // this.state.isBlack = true
+                    // this.state.isRed = false
+                    this.setState({isBlack: true})
+                    this.setState({isRed: false})
+                } else {
+                    h1.style.color = "red"
+                    this.setState({isBlack: false})
+                    this.setState({isRed: true})
+                }
+            }
+        }
+
+        ReactDOM.render(<MyComponent/>,document.getElementById('test'))
+    </script>
+</body>
+</html>
+

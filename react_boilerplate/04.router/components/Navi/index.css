@@ -1,0 +1,39 @@
+.navi{
+    /* float: left; */
+    margin-right: 20px;
+}
+
+.navi ul{
+    margin: 0px;
+    padding: 0px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.navi li{
+    text-decoration: none;
+    list-style: none;
+    height: 50px;
+    background-color: orange;
+    line-height: 50px;
+    padding: 0px 20px;
+    border-bottom: 1px solid grey;
+}
+
+.navi li:hover{
+    cursor: pointer;
+    background: rgb(198, 129, 3);
+}
+
+.navi li:last-child{
+    border-bottom: none;
+}
+
+.navi li a{
+    text-decoration: none;
+    color: black;
+}
+
+.active{
+    color: blue!important;
+}

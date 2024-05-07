@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="../js/react.development.js"></script>
+<script src="../js/react-dom.development.js"></script>
+<script src="../js/babel.min.js"></script>
+<body>
+    <div id="test"></div>
+
+</body>
+<script type="text/babel">
+    
+    class MyComponent extends React.Component{
+        render(){
+            console.log(this)
+            // react changed onclick to onClick, and same to other original listener event
+            // in jsx, if we want to use js expression, we have to add {}
+            return <h1 id="myh1" onClick={this.changeBackground}>hello, I am good! React!</h1>
+        }
+
+        // class's function defined like this, can be invoked by instance of this class, and it is
+        // mounted to class prototype
+        // this is the reason, the this dosen't point to the instance of class
+        changeBackground = ()=>{
+            // headsup: don't forget to define h1, put a const in front of name h1
+            const h1 = document.getElementById('myh1');
+            h1.style.color = "red"
+        }
+    }
+
+    // need to be call with html tag like bellowings
+    ReactDOM.render(<MyComponent/>,document.getElementById('test'))
+</script>
+</html>
+

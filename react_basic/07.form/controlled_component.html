@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+
+        // In React, Controlled Components are those in which form's data is handled by the component's state.
+        class MyComponent extends React.Component{
+
+            // 这里其实就是自己再玩双向数据绑定
+
+            state = {
+                name: "",
+                age: 0,
+            }
+            
+            saveName = (event) => {
+                this.setState({name: event.target.value})
+            }
+
+            saveAge = (event) => {
+                this.setState({age: event.target.value})
+            }      
+            
+            //表单提交的回调
+			handleSubmit = (event)=>{
+				event.preventDefault() //阻止表单默认的提交，就不会跳 action 了
+				const {name,age} = this.state
+				alert(`你输入的用户名是：${name},你输入的age是：${age}`)
+			}
+
+            render(){
+                return (
+                    <div>
+                        <form onSubmit={this.handleSubmit}>
+                            <input onChange={this.saveName} placeholder="Type name in" type="text" name="name"/>
+                            <input onChange={this.saveAge} placeholder="Type age in" type="text" name="name"/>
+                            <button type="submit">submit</button>
+                        </form>
+                        name:<h4>{this.state.name}</h4>
+                        age:<h4>{this.state.age}</h4>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>, document.getElementById("app"))
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        class MyComponent extends React.Component{
+            // 通过内联函数 inline function
+            showData = () => {
+                const { input1 } = this
+                alert(input1.value)
+            }
+
+            showData2 = () => {
+                const { input2 } = this
+                alert(input2.value)
+            }
+
+            render(){
+                // 注意别写“”
+                // 这种情况，ref 函数会被执行俩次，类方法绑定的 ref 不会出现这种情况
+                // 但是官方都说了执行俩次请示并不影响 
+                return (
+                    <div>
+                        <input ref={c => {this.input1 = c}} type="text" placeholder="点击按钮提示数据"/>&nbsp;
+                        <button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;
+						<input ref={c => {this.input2 = c}} onBlur={this.showData2} type="text" placeholder="失去焦点提示数据"/>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>, document.getElementById("app"))
+    </script>
+</body>
+</html>

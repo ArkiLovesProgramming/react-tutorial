@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!-- 引入react核心库 -->
+<script src="../js/react.development.js"></script>
+<!-- 引入react-dom用于支持react操作DOM -->
+<script src="../js/react-dom.development.js"></script>
+<!-- 引入babel用于ES6转ES5，jsx 转 js -->
+<script src="../js/babel.min.js"></script>
+<body>
+    <!--准备一个容器-->
+    <div id="test"></div>
+
+</body>
+<!-- 注意这里一定要添加babel，表示这里写的是jsx，用babel翻译为js-->
+<script type="text/babel">
+    
+    // create a component with function
+    // the name should start with uppercase letter for component definition
+    function MyComponent(){
+        return <h1>hello, I am good! React!</h1>
+    }
+
+    // need to be call with html tag like bellowings
+    ReactDOM.render(<MyComponent/>,document.getElementById('test'))
+</script>
+</html>
+

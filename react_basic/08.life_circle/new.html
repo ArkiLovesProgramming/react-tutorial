@@ -1,0 +1,5 @@
+<!-- 旧中除了常用的 componentDidMount, componentWillUnmount外，其它都被移除了，不支持了 -->
+<!-- 新引入的 getDerivedStateFromProps, getSnapshotBeforeUpdate 都很少用，常用的都保留了 -->
+<!-- getDerivedStateFromProps 这个只有你想要把 state 的值完全取决于 props 才用  -->
+<!-- getSnapshotBeforeUpdate 是用来在完成更新成功之前保留记录一下你想要的数据，然后在
+componentDidUpdate(prevProps,prevState,snapshotValue) 中获取到, 保存快照 -->

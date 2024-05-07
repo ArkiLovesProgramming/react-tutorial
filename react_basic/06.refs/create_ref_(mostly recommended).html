@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        class MyComponent extends React.Component{
+            // 注意每种方式定义 ref 取值的方法
+            showData = () => {
+                alert(this.input1ref.current.value)
+            }
+
+            showData2 = () => {
+                alert(this.input2ref.current.value)
+            }
+
+
+            //虽然是最推荐，但是我们可以用这个，或者 inline，都挺好
+            //其实是创建了一个函数，然后然 ref 里面去调用
+            input1ref = React.createRef()
+            input2ref = React.createRef()
+
+            render(){
+                return (
+                    <div>
+                        <input ref={this.input1ref} type="text" placeholder="点击按钮提示数据"/>&nbsp;
+                        <button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;
+						<input ref={this.input2ref} onBlur={this.showData2} type="text" placeholder="失去焦点提示数据"/>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>, document.getElementById("app"))
+    </script>
+</body>
+</html>

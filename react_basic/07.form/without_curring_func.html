@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>currying function</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+
+        // 不用柯里化技术的实现，俩种方法都常用
+        class MyComponent extends React.Component{
+
+            // 这里其实就是自己再玩双向数据绑定
+
+            state = {
+                name: "",
+                age: 0,
+            }
+
+            saveFormData = (keyname, event)=>{
+                this.setState({[keyname]: event.target.value})
+            }
+            
+            //表单提交的回调
+			handleSubmit = (event)=>{
+				event.preventDefault() //阻止表单默认的提交，就不会跳 action 了
+				const {name,age} = this.state
+				alert(`你输入的用户名是：${name},你输入的age是：${age}`)
+			}
+
+            render(){
+                return (
+                    <div>
+                        <form onSubmit={this.handleSubmit}>
+                            <input onChange={event => {this.saveFormData("name", event)}} placeholder="Type name in" type="text" name="name"/>
+                            <input onChange={event => {this.saveFormData("age", event)}} placeholder="Type age in" type="text" name="name"/>
+                            <button type="submit">submit</button>
+                        </form>
+                        name:<h4>{this.state.name}</h4>
+                        age:<h4>{this.state.age}</h4>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>, document.getElementById("app"))
+    </script>
+</body>
+</html>

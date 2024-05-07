@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>life circle</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+
+        // 测试了所有的旧的生命周期
+        class Demo extends React.Component{
+
+            constructor(props){
+                console.log("Demo---constructor")
+                super(props)
+            }
+
+            // 完成挂载后，相当于 vue 的 mounted，是一个重要的生命周期函数，我们通常设置定时器，订阅啥的
+            componentDidMount(){
+                console.log("Demo---componentDidMount")
+                this.timer = setInterval(()=>{
+                    const {timer} = this.state
+                    this.setState({timer: timer+1})
+                }, 1000)
+            }
+
+            // 即将结束前（注意不是已经结束了），我们通常清除定时器，取消订阅
+            componentWillUnmount(){
+                console.log("Demo----componentWillUnmount")
+                clearInterval(this.timer)
+            }
+            
+            // update
+            componentWillReceiveProps(nextProps){
+                console.log("Demo----componentWillReceiveProps", nextProps)
+            }
+
+            shouldComponentUpdate(){
+                console.log("Demo----shouldComponentUpdate")
+                return true
+            }
+
+            componentWillUpdate(){
+                console.log("Demo----componentWillUpdate")
+            }
+
+            componentDidUpdate(prevProps, prevState){
+                console.log("Demo----componentDidUpdate", prevProps, prevState)
+            }
+
+
+            state = {timer: 0}
+
+            Unmount = ()=>{
+                ReactDOM.unmountComponentAtNode(document.getElementById("root"))
+            }
+
+            render(){
+                console.log("Demo----render")
+                return (
+                    <div>
+                        <h1>Current time:{this.state.timer}</h1>    
+                        <button onClick={this.Unmount}>Unmount</button>
+                    </div>
+                )
+            }
+        }
+
+        class DemoFather extends React.Component{
+
+            fatherRender = ()=>{
+                this.setState({name: this.input.value})
+            }
+
+            state = {name: ""}
+
+            render(){
+                return (
+                    <div>
+                        <Demo name={this.state.name}/>    
+                        <h1>I am demo's father component</h1>
+                        <input ref={c => {this.input = c}} type="text"/>
+                        <button onClick={this.fatherRender}>Click me to rerender father component</button>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<DemoFather/>, document.getElementById("root"))
+    </script>
+</body>
+</html>

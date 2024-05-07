@@ -1,0 +1,38 @@
+.home{
+    /* float: left; */
+    margin-right: 20px;
+}
+
+.home ul{
+    margin: 0px;
+    padding: 0px;
+    border-radius: 8px;
+    overflow: hidden;
+    width: fit-content;
+}
+
+.home li{
+    text-decoration: none;
+    list-style: none;
+    height: 50px;
+    background-color: orange;
+    line-height: 50px;
+    padding: 0px 20px;
+    display: inline-block;
+    border-right: 1px solid grey;
+    /* border-radius: 8px; */
+}
+
+.home li:hover{
+    cursor: pointer;
+    background: rgb(198, 129, 3);
+}
+
+.home li:last-child{
+    border-right: none;
+}
+
+.home li a{
+    text-decoration: none;
+    color: black;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <!-- for the version after react 15, you have to introducte prop-types.js, if you want to limit props type -->
+    <script src="../js/prop-types.js"></script>
+    <script type="text/babel">
+        class MyComponent extends React.Component{
+            render(){
+                const {name, sex, age} = this.props
+                return (
+                    <ul>
+						<li>姓名：{name}</li>
+						<li>性别：{sex}</li>
+						<li>年龄：{age}</li>
+					</ul>
+                )
+            }
+            // 也可以写在类里面，英文和下面那种一样，因为加了 static，所以这是挂载到类上的
+            // 推荐把所有东西都写到组件内部
+            static propTypes = {
+                name: PropTypes.string,
+                sex: PropTypes.string,
+                age: PropTypes.number
+            }
+            static defaultProps = {
+                sex: "unknown"
+            }
+        }
+        // 设置了这个，任然可以用错误的 type，只不过控制台会有错误提醒
+        // MyComponent.propTypes = {
+        //     name: PropTypes.string,
+        //     sex: PropTypes.string,
+        //     age: PropTypes.number
+        // }
+        // 设置默认
+        // MyComponent.defaultProps = {
+        //     sex: "unknown"
+        // }
+        ReactDOM.render(<MyComponent name="arki" age="13" sex="male"/>, document.getElementById("app"))
+    </script>
+</body>
+</html>

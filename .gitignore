@@ -1,0 +1,16 @@
+# Dependency directories
+node_modules/
+
+# Environment files
+.env
+
+# Build directory
+build/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.DS_Store

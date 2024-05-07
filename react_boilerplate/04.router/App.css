@@ -1,0 +1,14 @@
+.app{
+  width: 900px;
+  /* background-color: aqua; */
+  margin: auto;
+}
+
+.content{
+  display: flex;
+  flex-direction: row;
+}
+
+.active{
+  color: blue!important;
+}

@@ -1,0 +1,15 @@
+.input{
+    /* background-color: aqua;
+    height: 35px;
+    border: 1px solid grey;
+    border-radius: 8px; */
+    margin-bottom: 18px;
+}
+
+.input input{
+    width: -webkit-fill-available;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    font-size: 14px;
+}
